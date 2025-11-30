@@ -1,16 +1,23 @@
 version: '3.8'
 
 services:
-  web:
+  fisio-lapinza-web:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: fisioterapeuta-web
-    ports:
-      - "3000:3000"
+    container_name: fisio-lapinza-web
+
     environment:
       - NODE_ENV=production
+
+    expose:
+      - "3000"
+
+    networks:
+      - proxy
+
     restart: unless-stopped
-    # Si necesitas variables de entorno adicionales, descomenta y añádelas:
-    # env_file:
-    #   - .env.local
+
+networks:
+  proxy:
+    external: true
